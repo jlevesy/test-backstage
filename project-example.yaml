@@ -15,7 +15,9 @@ spec:
   - git@github.com:voiapp/argo-cd-apps.git
 
   # Only permit applications to deploy to the guestbook namespace in the same cluster
-  destinations:
+  destinations:- namespace: ddqdqwdqwd
+  server: {{ .Values.spec.destination.server }}
+
   - namespace: {{ .Values.spec.destination.namespace }}
     server: {{ .Values.spec.destination.server }}
 
