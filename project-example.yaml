@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: fleet
+  namespace: infra #this must be the namespace that argo-cd is deployed into
+  # Finalizer that ensures that project is not deleted until it is not referenced by any application
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  # Project description
+  description: Fleet squad services
+
+  # Allow manifests to deploy only from the manifest mono repo
+  sourceRepos:
+  - git@github.com:voiapp/argo-cd-apps.git
+
+  # Only permit applications to deploy to the guestbook namespace in the same cluster
+  destinations:
+  - namespace: {{ .Values.spec.destination.namespace }}
+    server: {{ .Values.spec.destination.server }}
+
+  # SyncWindows controls when syncs can be run for apps in this project
+  # see https://github.com/argoproj/argo-cd/blob/master/manifests/crds/appproject-crd.yaml
+  #syncWindows:
