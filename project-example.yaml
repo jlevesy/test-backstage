@@ -22,5 +22,3 @@ spec:
   # SyncWindows controls when syncs can be run for apps in this project
   # see https://github.com/argoproj/argo-cd/blob/master/manifests/crds/appproject-crd.yaml
   #syncWindows:
-- namespace: ddqdqwdqwd
-  server: {{ .Values.spec.destination.server }}
